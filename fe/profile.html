@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/css/profile.css">
+</head>
+
+<body>
+    <div class="profile">
+        <div class="sidebar">
+            <a href="/profile.html">
+                <div class="sidebar-user" >
+                  <div class="modify-image">
+                      <img src="/assets/picture/Ellipse 1.png" alt="">
+                  </div>
+                  <div class="user-name">Michael</div>
+              </div>
+              </a>
+            <div class="sidebar-opts">
+                <a href="/dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/income.html"><i class="fa-solid fa-arrow-trend-up"></i> Income</a>
+                <a href="#"><i class="fa-solid fa-arrow-trend-down"></i> Expense</a>
+                <a href="/search_index.html"><i class="fas fa-search"></i> Search</a>
+            </div>
+            <div class="sidebar-logout">
+                <a href="/index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a>
+            </div>
+        </div>
+        <div class="main" id="profile-detail">
+            <div class="modify-image">
+                <img id="user-img" src="/assets/picture/Ellipse 1.png" alt="">
+                <button class="img-btn" id="change-img-btn">Change the image</button>
+            </div>
+            <div class="user-detail">
+                <div class="user-detail-info">
+                    <div class="username">
+                        <div class="title">Username</div>
+                        <div class="content">
+                            Michael
+                        </div>
+                    </div>
+                    <div class="firstname">
+                        <div class="title">First name</div>
+                        <div class="content">
+                            Anh
+                        </div>
+                    </div>
+                    <div class="lastname">
+                        <div class="title">Last name</div>
+                        <div class="content">
+                            Nguyễn
+                        </div>
+                    </div>
+                    <div class="dateofbirth">
+                        <div class="title">Date of birth</div>
+                        <div class="content">
+                            01/01/2004
+                        </div>
+                    </div>
+                    <div class="Email">
+                        <div class="title">Email</div>
+                        <div class="content">
+                            nguyenanh@gmail.com
+                        </div>
+                    </div>
+                    <div class="Address">
+                        <div class="title">Address</div>
+                        <div class="content">
+                            kjasrgisahgoihsogs
+                        </div>
+                    </div>
+                    <div class="Phonenumber">
+                        <div class="title">Phone number</div>
+                        <div class="content">
+                            123456789
+                        </div>
+                    </div>
+                </div>
+                <div class="user-detail-modify">
+                    <div class="Changepassword">
+                        <a href="#" id="change-pass">Change password?</a>
+                    </div>
+
+                    <button id="edit-profile">Edit profile</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="update-password" id="update-form">
+
+            <div class="update-password-info">
+                <div class="CurrentPassword">
+                    <div class="title">Current password</div>
+                    <div class="content">
+                        <input type="text" placeholder="*********">
+                        <i class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+                <div class="NewPassword">
+                    <div class="title">New password</div>
+                    <div class="content">
+                        <input type="text" placeholder="*********">
+                        <i class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+                <div class="ConfirmNewPassword">
+                    <div class="title">Confirm new password</div>
+                    <div class="content">
+                        <input type="text" placeholder="*********">
+                        <i class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="update-password-btn">
+                <button class="cancel" id="cancel">Cancel</button>
+                <button class="change">Change</button>
+            </div>
+        </div>
+
+        <div class="main-2" id="input-profile">
+            <div class="modify-image">
+                <img src="/assets/picture/Ellipse 1.png" alt="">
+            </div>
+            <div class="user-detail">
+                <div class="user-detail-info">
+                    <div class="username">
+                        <div class="title">Username</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="firstname">
+                        <div class="title">First name</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="lastname">
+                        <div class="title">Last name</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="dateofbirth">
+                        <div class="title">Date of birth</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="Email">
+                        <div class="title">Email</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="Address">
+                        <div class="title">Address</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="Phonenumber">
+                        <div class="title">Phone number</div>
+                        <div class="content">
+                            <input type="text" placeholder="*********">
+                        </div>
+                    </div>
+                </div>
+                <div class="user-detail-modify">
+                    <button>Confirm update</button>
+                    <button id="cancel-2">Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const profile = document.getElementById('profile-detail');
+        const changepass = document.getElementById('change-pass');
+        const editbtn = document.getElementById('edit-profile');
+        const updateform = document.getElementById('update-form');
+        changepass.addEventListener("click", () => {
+            profile.style.display = "none";
+            updateform.style.display = "flex";
+        })
+        const cancel = document.getElementById('cancel');
+        cancel.addEventListener("click", () => {
+            profile.style.display = "flex";
+            updateform.style.display = "none";
+
+        })
+        const editprofile = document.getElementById('input-profile');
+        editbtn.addEventListener("click", () => {
+            editprofile.style.display = "flex";
+            profile.style.display = "none";
+        })
+        const cancel2 = document.getElementById('cancel-2');
+        cancel2.addEventListener("click", () => {
+            editprofile.style.display = "none";
+            profile.style.display = "flex";
+
+        })
+        const changeImgBtn = document.getElementById('change-img-btn'); // Nút đổi ảnh
+    const userImgMain = document.querySelector('.profile .main .modify-image img'); // Ảnh trong .modify-image
+    const userImgProfile = document.querySelector('#input-profile .modify-image img'); // Ảnh trong #input-profile
+    const dashimg = document.querySelector('.profile .sidebar .sidebar-user .modify-image img')
+    changeImgBtn.addEventListener('click', () => {
+        // Hiển thị prompt cho người dùng nhập URL
+        const imageUrl = prompt("Enter the URL of the new image:");
+
+        // Kiểm tra nếu URL hợp lệ
+        if (imageUrl && imageUrl.trim() !== "") {
+            const trimmedUrl = imageUrl.trim();
+            // Cập nhật cả hai ảnh
+            userImgMain.src = trimmedUrl;
+            userImgProfile.src = trimmedUrl;
+            dashimg.src=trimmedUrl;
+        } else {
+            alert("No URL entered or invalid URL!");
+        }
+    });
+    </script>
+</body>
+
+</html>

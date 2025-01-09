@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --color--text-light: #FFFFFF;
+    --color--header:#1488DB;
+    --font:"Be Vietnam Pro", sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body{
+    font-family: var(--font);
+    line-height: normal;
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+.profile{
+    display: flex;
+    height: 100%;
+    background-color: #073a4d;
+}
+
+.profile .sidebar{
+ display: flex;
+ flex-direction: column;
+ background-color: #673ab7;
+ width: auto;
+}
+.profile .sidebar .sidebar-user{
+    display: flex;
+    background-color: #073a4d;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+}
+.profile .sidebar .sidebar-user .modify-image{
+    width: 50%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+.profile .sidebar .sidebar-user .modify-image img{
+    width: 94px;
+    height: 86px;
+}
+.profile .sidebar .sidebar-user .user-name{
+    width: 50%;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile .sidebar .sidebar-opts{
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    padding: 20px 30px 30px 30px;
+    gap: 40px;
+
+}
+.profile .sidebar .sidebar-opts a{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 32px;
+    font-weight: 300;
+    display:flex;
+    gap:20px;
+}
+.profile .sidebar .sidebar-logout{
+    display: flex;
+    height: 50%;
+    padding: 30px;
+    gap: 20px;
+    align-items: self-end;
+
+}
+.profile .sidebar .sidebar-logout a{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 32px;
+    font-weight: 300;
+    display:flex;
+    gap:20px;
+}
+.profile .main{
+    display:flex;
+    /* display: none; */
+    width: 100%;
+    padding: 50px;
+}
+.profile .main .modify-image{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 40%;
+    padding: 10px;
+    gap:20px;
+    align-items: center;
+}
+.profile .main .modify-image img{
+    width: 300px;
+    height: 288px;
+
+}
+.profile .main .modify-image button{
+    background-color: transparent;
+    border: 2px solid #c8a8eb;
+    width: auto;
+    height: auto;
+    padding: 10px 30px;
+    border-radius: 57px;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 500;
+}
+ .profile .main .user-detail{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile .main .user-detail .user-detail-info{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.profile .main .user-detail .user-detail-info .title{
+    color: #c8a8eb;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+}
+.profile .main .user-detail .user-detail-info .content{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+}
+.profile .main .user-detail .user-detail-info .username,
+.profile .main .user-detail .user-detail-info .firstname,
+.profile .main .user-detail .user-detail-info .lastname,
+.profile .main .user-detail .user-detail-info .dateofbirth,
+.profile .main .user-detail .user-detail-info .Email, 
+.profile .main .user-detail .user-detail-info .Address, 
+.profile .main .user-detail .user-detail-info .Phonenumber
+{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    border: 2px solid #FFFFFF;
+    padding: 20px 20px;
+    border-radius: 10px;
+
+} 
+.profile .main .user-detail .user-detail-modify{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 20px;
+    
+}
+.profile .main .user-detail .user-detail-modify .Changepassword a{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+}
+.profile .main .user-detail .user-detail-modify button{
+   
+   
+    background-color: transparent;
+    border: 2px solid #d0bcff;
+    padding: 20px 20px;
+    border-radius:57px;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 62px;
+}
+.profile  .main .content input{
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 30px;
+    
+}
+.profile  .main .content input::placeholder{
+color: #FFFFFF;
+font-family: var(--font);
+font-weight: 500;
+font-size: 20px;
+justify-content: center;
+text-align: center;
+}
+.profile  .update-password{
+    /* display: flex; */
+    display:none;
+    flex-direction: column;
+    gap:10px;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.profile  .update-password .update-password-info{
+    display:flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 52%;
+    padding: 20px;
+
+}
+.profile  .update-password .title{
+    color: #c8a8eb;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+}
+.profile  .update-password .content{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    gap: 10px;
+}
+.profile  .update-password .content input{
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.profile  .update-password .content input::placeholder{
+color: #FFFFFF;
+font-family: var(--font);
+font-weight: 500;
+font-size: 20px;
+justify-content: center;
+text-align: center;
+}
+.profile .update-password .update-password-info .CurrentPassword,
+.profile .update-password .update-password-info .NewPassword, 
+.profile .update-password .update-password-info .ConfirmNewPassword{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    border: 2px solid #FFFFFF;
+    padding: 20px 20px;
+    border-radius: 10px;
+
+}
+.profile .update-password .update-password-btn{
+    display:flex;
+    width: 52%;
+    justify-content: space-between;
+    padding: 20px 20px;
+}
+.profile  .update-password .update-password-btn  button{
+    background-color: transparent;
+    border: 2px solid #d0bcff;
+    padding: 20px 20px;
+    border-radius:57px;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 62px;
+}
+
+
+
+
+.profile .main-2{
+    /* display:flex;  */
+    display: none;
+    width: 100%;
+    padding: 50px;
+}
+.profile .main-2 .modify-image{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 40%;
+    padding: 10px;
+    gap:20px;
+    align-items: center;
+}
+.profile .main-2 .modify-image img{
+    width: 300px;
+    height: 288px;
+
+}
+.profile .main-2 .modify-image button{
+    background-color: transparent;
+    border: 2px solid #c8a8eb;
+    width: auto;
+    height: auto;
+    padding: 10px 30px;
+    border-radius: 57px;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 500;
+}
+.profile .main-2 .user-detail{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile .main-2 .user-detail .user-detail-info{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    
+}
+.profile .main-2 .user-detail .user-detail-info .title{
+    color: #c8a8eb;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+}
+.profile .main-2 .user-detail .user-detail-info .content{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    display: flex;
+    gap: 10px;
+}
+.profile .main-2 .user-detail .user-detail-info .username,
+.profile .main-2 .user-detail .user-detail-info .firstname,
+.profile .main-2 .user-detail .user-detail-info .lastname,
+.profile .main-2 .user-detail .user-detail-info .dateofbirth,
+.profile .main-2 .user-detail .user-detail-info .Email,
+.profile .main-2 .user-detail .user-detail-info .Address,
+.profile .main-2 .user-detail .user-detail-info .Phonenumber
+{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    border: 2px solid #FFFFFF;
+    padding: 20px 20px;
+    border-radius: 10px;
+
+}
+.profile .main-2 .user-detail .user-detail-modify{
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 20px;
+    
+}
+.profile .main-2 .user-detail .user-detail-modify .Changepassword a{
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+}
+.profile .main-2 .user-detail .user-detail-modify button{
+   
+   
+    background-color: transparent;
+    border: 2px solid #d0bcff;
+    padding: 20px 20px;
+    border-radius:57px;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 62px;
+}
+.profile  .main-2 .content input{
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 30px;
+    
+}
+.profile  .main-2 .content input::placeholder{
+color: #FFFFFF;
+font-family: var(--font);
+font-weight: 500;
+font-size: 20px;
+justify-content: center;
+text-align: center;
+}

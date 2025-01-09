@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --color--text-light: #FFFFFF;
+    --color--header:#1488DB;
+    --font:"Be Vietnam Pro", sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    font-family: var(--font);
+    line-height: normal;
+    height: 100vh;
+    background-color: #073A4D;
+}
+
+a{
+    text-decoration: none;
+}
+  /* Sidebar */
+   .sidebar{
+    display: flex;
+    flex-direction: column;
+    background-color: #673ab7;
+    width: auto;
+   }
+    .sidebar .sidebar-user{
+       display: flex;
+       background-color: #9BA89F;
+       width: 100%;
+       
+   }
+    .sidebar .sidebar-user .user-img{
+       width: 50%;
+       height: auto;
+       justify-content: center;
+       align-items: center;
+       text-align: center;
+       padding: 10px;
+   }
+    .sidebar .sidebar-user .user-img img{
+       width: 94px;
+       height: 86px;
+   }
+    .sidebar .sidebar-user .user-name{
+       width: 50%;
+       color: #FFFFFF;
+       font-family: var(--font);
+       font-size: 24px;
+       font-weight: 500;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+    .sidebar .sidebar-opts{
+       display: flex;
+       flex-direction: column;
+       height: 50%;
+       width: 100%;
+       /* gap: 20px; */
+       /* padding-top: 30px; */
+   
+   }
+    .sidebar .sidebar-opts a{
+       color: #FFFFFF;
+       font-family: var(--font);
+       font-size: 32px;
+       font-weight: 300;
+       display:flex;
+       gap:20px;
+       padding: 20px 30px;
+       height: auto;
+       
+   }
+   .sidebar .sidebar-opts .search{
+    background-color: #1488DB;
+    
+   }
+    .sidebar .sidebar-logout{
+       display: flex;
+       height: 50%;
+       padding: 30px;
+       gap: 20px;
+       align-items: self-end;
+      
+   }
+    .sidebar .sidebar-logout a{
+       color: #FFFFFF;
+       font-family: var(--font);
+       font-size: 32px;
+       font-weight: 300;
+       display:flex;
+       gap:20px;
+       
+   }
+  
+  /* Main Content */
+  .main-content {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 10px;
+    border: 2px solid #667479;
+    border-radius: 10px;
+    width: calc((100% - 10px)/2);
+    background-color: #D9D9D9;
+    color: #667479;
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .search-bar .date-input {
+    display: flex;
+    align-items: center;
+    width:calc((100% - 10px)/2);
+    border-radius: 10px;
+    border: 2px solid #667479;
+    height: 100%;
+    padding: 10px 24px;
+    justify-content: space-between;
+    background-color: #D9D9D9;
+    color: #667479;
+    font-size: 18px;
+    font-family: var(--font);
+    font-weight: 500;
+    
+  }
+  
+  .search-bar .date-input input {
+    width: 35%;
+    height: 100%;
+    border: 0;
+    color: #667479;
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: 500;
+    background-color: transparent;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  tbody tr:hover {
+    background-color: #597B88; /* Màu nền khi hover */
+    color: #FFFFFF; /* Màu chữ khi hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+}
+.desc-flex {
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px;
+  gap: 20px;
+}
+.desc-flex .title{
+  color: #C8A8EB;
+}
+  th {
+    color: #C8A8EB;
+    border-bottom: 1px solid #ffffff;
+  }
+  
+  .income {
+    color: #1387B2;
+  }
+  
+  .expense {
+    color: #FF6347;
+  }
+  .main-content .search-filter button,
+  .main-content .search-filter select {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    padding: 12px 28px;
+    border-radius: 57px;
+    color: #ffffff;
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 500;
+    width: auto;
+  }
+  

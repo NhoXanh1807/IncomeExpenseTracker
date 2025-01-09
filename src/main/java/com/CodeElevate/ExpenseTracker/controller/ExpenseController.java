@@ -1,4 +1,5 @@
 package com.CodeElevate.ExpenseTracker.controller;
+
 import com.CodeElevate.ExpenseTracker.dto.ExpenseDTO;
 import com.CodeElevate.ExpenseTracker.entity.Expense;
 import org.springframework.http.HttpStatus;
@@ -26,40 +27,48 @@ public class ExpenseController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @GetMapping("/all")
-    public ResponseEntity<?>getAllExpenses(){
-        return ResponseEntity.ok(expenseService.getAllExpenses());
+    public ResponseEntity<?> getAllExpenses() {
+        try {
+            return ResponseEntity.ok(expenseService.getAllExpenses());
+        } catch (Exception e) {
+            e.printStackTrace(); // Ghi log lỗi ra console hoặc file log
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Có lỗi xảy ra khi xử lý yêu cầu: " + e.getMessage());
+        }
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<?> getExpenseByID(@PathVariable Long id){
-        try{
+    public ResponseEntity<?> getExpenseByID(@PathVariable Long id) {
+        try {
             return ResponseEntity.ok(expenseService.getExpenseByID(id));
-        }
-        catch (EntityNotFoundException ex){
+        } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateExpense(@PathVariable Long id, @RequestBody ExpenseDTO dto){
-        try{
+    public ResponseEntity<?> updateExpense(@PathVariable Long id, @RequestBody ExpenseDTO dto) {
+        try {
             return ResponseEntity.ok(expenseService.updateExpense(id, dto));
-        } catch (EntityNotFoundException ex){
+        } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteExpense(@PathVariable Long id){
-        try{
+    public ResponseEntity<?> deleteExpense(@PathVariable Long id) {
+        try {
             expenseService.deleteExpense(id);
             return ResponseEntity.ok(null);
-        } catch (EntityNotFoundException ex){
+        } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }

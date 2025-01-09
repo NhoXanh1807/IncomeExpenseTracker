@@ -1,6 +1,5 @@
 package com.CodeElevate.ExpenseTracker.controller;
 
-
 import com.CodeElevate.ExpenseTracker.dto.IncomeDTO;
 
 import com.CodeElevate.ExpenseTracker.entity.Income;
@@ -27,38 +26,44 @@ public class IncomeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+
     @GetMapping("/all")
-    public ResponseEntity<?> getAllIncome() {
-        return ResponseEntity.ok(incomeService.getAllIncomes());
+    public ResponseEntity<?> getAllIncomes(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "asc") String sort) {
+        return ResponseEntity.ok(incomeService.getAllIncomes(page, sort));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateIncome(@PathVariable Long id, @RequestBody IncomeDTO incomeDTO) {
-        try{
-            return ResponseEntity.ok(incomeService.updateIncome(id,incomeDTO));
-        } catch (EntityNotFoundException ex){
+        try {
+            return ResponseEntity.ok(incomeService.updateIncome(id, incomeDTO));
+        } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<?> getIncomeById(@PathVariable Long id){
-        try{
+    public ResponseEntity<?> getIncomeById(@PathVariable Long id) {
+        try {
             return ResponseEntity.ok(incomeService.getIncomeById(id));
-        } catch (EntityNotFoundException ex){
+        } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteIncome(@PathVariable Long id){
-        try{
+    public ResponseEntity<?> deleteIncome(@PathVariable Long id) {
+        try {
             incomeService.deleteIncome(id);
             return ResponseEntity.ok(null);
-        } catch(EntityNotFoundException ex){
+        } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-        } catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong");
         }
     }

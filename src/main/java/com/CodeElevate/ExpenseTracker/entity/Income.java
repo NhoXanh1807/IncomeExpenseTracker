@@ -1,6 +1,5 @@
 package com.CodeElevate.ExpenseTracker.entity;
 
-
 import com.CodeElevate.ExpenseTracker.dto.IncomeDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +20,8 @@ public class Income {
     private LocalDate date;
     private String category;
     private String description;
-    public IncomeDTO getIncomeDto(){
+
+    public IncomeDTO getIncomeDto() {
         IncomeDTO incomeDTO = new IncomeDTO();
         incomeDTO.setId(id);
         incomeDTO.setTitle(title);

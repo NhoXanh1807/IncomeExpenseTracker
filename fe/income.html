@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income</title>
+    <link rel="stylesheet" href="../assets/css/income.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="main-section">
+        <div class="sidebar">
+            <a href="/profile.html">
+                <div class="sidebar-user" >
+                  <div class="modify-image">
+                      <img src="/assets/picture/Ellipse 1.png" alt="">
+                  </div>
+                  <div class="user-name">Michael</div>
+              </div>
+              </a>
+            <div class="sidebar-opts">
+                <a href="/dashboard.html" class="dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/income.html" class="income"><i class="fa-solid fa-arrow-trend-up"></i> Income</a>
+                <a href="#"><i class="fa-solid fa-arrow-trend-down"></i> Expense</a>
+                <a href="/search_index.html"><i class="fas fa-search"></i> Search</a>
+            </div>
+            <div class="sidebar-logout">
+                <a href="/index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a>
+            </div>
+        </div>
+        <div class="main-right">
+            <div class="inner-total-income">
+                <div>Total income: </div>
+                <div class="total-income-value">
+                    0 VND
+                </div>
+            </div>
+            <div class="inner-income-detail">
+                <div class="new-income">
+                    <div class="inner-new-title">
+                        Post new income
+                    </div>
+                    <form action="#" class="post-form">
+                        <input type="text" name="title" id="title" placeholder="Enter title">
+                        <input type="number" name="amount" id="amount" placeholder="Enter amount">
+                        <input type="date" name="date" id="date" placeholder="Select date">
+                        <textarea id="description" name="desscription" rows="6" cols="40" placeholder="Enter description"></textarea>
+                        <select id="category" placeholder="Select the category">
+                            <option value="" disabled selected>Select the category:</option>
+                            <option value="income">Income</option>
+                            <option value="earning">Earning</option>
+                        </select>
+                        <button type="submit">
+                            Post income
+                        </button>
+                        <button >
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+                <div class="past-income">
+                    <div class="past-income-title">
+                        Past incomes
+                    </div>
+                    <div class="past-income-detail">
+                        <div class="report">
+                            <div class="content">
+                                <div class="content-title">
+                                    <i class="fa-regular fa-comment-dots"></i>
+                                    <div class="content-title-main">Bonus</div>
+                                </div>
+                                <div class="content-amount">
+                                    <i class="fa-solid fa-coins"></i>
+                                    <div class="content-amount-main">400.000VND</div>
+                                </div>
+                                <div class="content-date">
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                    <div class="content-date-main">20/02/2024</div>
+                                </div>
+                                <div class="content-catagories">
+                                    <i class="fa-regular fa-font-awesome"></i>
+                                    <div class="content-catagories-main">Earning</div>
+                                </div>
+
+                            </div>
+                            <div class="report-btn">
+                                <button class="modify"><i class="fa-solid fa-pen"></i></button>
+                                <button class="delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

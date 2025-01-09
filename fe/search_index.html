@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="/assets/css/search_style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="/profile.html">
+      <div class="sidebar-user" >
+        <div class="user-img">
+            <img src="/assets/picture/Ellipse 1.png" alt="">
+        </div>
+        <div class="user-name">Michael</div>
+    </div>
+    </a>
+    <div class="sidebar-opts">
+        <a href="/dashboard.html" class="dashboard"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="/income.html" class="income"><i class="fa-solid fa-arrow-trend-up"></i> Income</a>
+        <a href="#" class="expense"><i class="fa-solid fa-arrow-trend-down"></i> Expense</a>
+        <a href="/search_index.html" class="search"><i class="fas fa-search"></i> Search</a>
+    </div>
+    <div class="sidebar-logout">
+        <a href="/index.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a>
+    </div>
+</div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="search-bar">
+      <input type="text" placeholder="Search title">
+      <div class="date-input">
+        <label for="date-from">Date - From:</label>
+        <input type="date" id="date-from">
+        <label for="date-to">To:</label>
+        <input type="date" id="date-to">
+      </div>
+    </div>
+    <div class="search-filter">
+      <div class="filter-group">
+        <button id="all-button">All</button>
+        <select id="type-filter">
+          <option value="">Type</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+        <select id="category-filter">
+          <option value="">Categories</option>
+          <option value="earning">Earning</option>
+          <option value="discretionary">Discretionary Expenses</option>
+        </select>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Title</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <tr class="report" id="report">
+          <td class="income">Income</td>
+          <td>Bonus</td>
+          <td class="income">400.000đ</td>
+          <td>20/02/2024</td>
+          <td>Earning</td>
+        </tr>
+        <tr class="desc">
+          <td colspan="5">
+            <div class="desc-flex">
+              <span class="title">Description:</span>
+              <span>Lorem ipsum dolor sit amet...</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="report">
+          <td class="expense">Expense</td>
+          <td>Dining out</td>
+          <td class="expense">200.000đ</td>
+          <td>20/02/2024</td>
+          <td>Discretionary Expenses</td>
+        </tr>
+        <tr class="desc">
+          <td colspan="5">
+            <div class="desc-flex">
+              <span class="title">Description:</span>
+              <span>Lorem ipsum dolor sit amet...</span>
+            </div>
+          </td>
+        </tr>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="/assets/js/search_script.js"></script>
+</body>
+</html>
