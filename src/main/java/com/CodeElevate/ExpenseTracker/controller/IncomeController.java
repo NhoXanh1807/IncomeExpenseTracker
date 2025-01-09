@@ -19,11 +19,18 @@ public class IncomeController {
 
     @PostMapping
     public ResponseEntity<?> postIncome(@RequestBody IncomeDTO incomeDTO) {
-        Income createdIncome = incomeService.postIncome(incomeDTO);
-        if (createdIncome != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        try {
+            Income createdIncome = incomeService.postIncome(incomeDTO);
+            if (createdIncome != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(createdIncome);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        } catch (Exception e) {
+            // Log lỗi để dễ dàng debug
+            e.printStackTrace(); // Hoặc dùng logger để ghi lại lỗi
+            // Phản hồi với mã lỗi 500 và thông báo lỗi
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
     }
 

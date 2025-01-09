@@ -70,10 +70,10 @@
 
                 if (response.ok) {
                     const token = await response.text();
-                    console.log('Login successful:', token);
+                  
 
                     // Redirect to dashboard.html
-                    alert('Login successful. Redirecting to dashboard...');
+                   
                     window.location.href = '/fe/dashboard.html';
                 } else {
                     // Handle server-side errors

@@ -24,10 +24,10 @@ public class IncomeServiceImpl implements IncomeService {
     private final IncomeRepository incomeRepository;
 
     public Income postIncome(IncomeDTO incomeDTO) {
-        return saveOrUpdateExpense(new Income(), incomeDTO);
+        return saveOrUpdateIncome(new Income(), incomeDTO);
     }
 
-    private Income saveOrUpdateExpense(Income income, IncomeDTO incomeDTO) {
+    private Income saveOrUpdateIncome(Income income, IncomeDTO incomeDTO) {
         income.setTitle(incomeDTO.getTitle());
         income.setDate(incomeDTO.getDate());
         income.setAmount(incomeDTO.getAmount());
@@ -71,7 +71,7 @@ public class IncomeServiceImpl implements IncomeService {
     public Income updateIncome(Long id, IncomeDTO incomeDTO) {
         Optional<Income> optionalIncome = incomeRepository.findById(id);
         if (optionalIncome.isPresent()) {
-            return saveOrUpdateExpense(optionalIncome.get(), incomeDTO);
+            return saveOrUpdateIncome(optionalIncome.get(), incomeDTO);
         } else {
             throw new EntityNotFoundException("Income is not present with id" + id);
         }

@@ -16,6 +16,7 @@ public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private Integer amount;
     private LocalDate date;
@@ -30,6 +31,7 @@ public class Income {
         incomeDTO.setCategory(category);
         incomeDTO.setDescription(description);
         incomeDTO.setDate(date);
+
         return incomeDTO;
     }
 }
