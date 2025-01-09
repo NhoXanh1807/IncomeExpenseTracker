@@ -226,6 +226,13 @@ text-align: center;
     padding: 20px;
 
 }
+.profile  .update-password .update-password-info .CurrentPassword,
+.profile  .update-password .update-password-info .NewPassword,
+.profile  .update-password .update-password-info .ConfirmNewPassword{
+    display: flex;
+    justify-content: space-between;
+}
+
 .profile  .update-password .title{
     color: #c8a8eb;
     font-family: var(--font);
@@ -239,6 +246,7 @@ text-align: center;
     font-weight: 500;
     display: flex;
     gap: 10px;
+    width: 40%;
 }
 .profile  .update-password .content input{
     background-color: transparent;
@@ -246,9 +254,14 @@ text-align: center;
     text-align: center;
     display: flex;
     justify-content: center;
+    color: #FFFFFF;
+    font-family: var(--font);
+    font-weight: 500;
+font-size: 20px;
+width: 90%;
 }
 .profile  .update-password .content input::placeholder{
-color: #FFFFFF;
+color: #667479;
 font-family: var(--font);
 font-weight: 500;
 font-size: 20px;

@@ -96,8 +96,8 @@
                 <div class="CurrentPassword">
                     <div class="title">Current password</div>
                     <div class="content">
-                        <input type="text" placeholder="*********">
-                        <i class="fa-regular fa-eye-slash"></i>
+                        <input type="text" placeholder="*********" >
+                        <i class="fa-regular fa-eye-slash" ></i>
                     </div>
                 </div>
                 <div class="NewPassword">
@@ -222,6 +222,22 @@
         } else {
             alert("No URL entered or invalid URL!");
         }
+    });
+    document.querySelectorAll('.fa-eye-slash').forEach(icon => {
+        icon.addEventListener('click', () => {
+            // Find the closest input field to this icon
+            const inputField = icon.previousElementSibling;
+
+            if (inputField.type === 'password') {
+                inputField.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                inputField.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        });
     });
     </script>
 </body>
