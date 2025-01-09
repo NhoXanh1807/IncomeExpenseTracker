@@ -35,7 +35,7 @@ a{
        width: 100%;
        
    }
-    .sidebar .sidebar-user .user-img{
+    .sidebar .sidebar-user .modify-image{
        width: 50%;
        height: auto;
        justify-content: center;
@@ -43,9 +43,10 @@ a{
        text-align: center;
        padding: 10px;
    }
-    .sidebar .sidebar-user .user-img img{
+    .sidebar .sidebar-user .modify-image img{
        width: 94px;
        height: 86px;
+       border-radius:50%;
    }
     .sidebar .sidebar-user .user-name{
        width: 50%;

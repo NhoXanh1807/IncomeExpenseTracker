@@ -93,5 +93,14 @@
             </div> 
         </div>
     </div>
+    <script>
+               document.addEventListener('DOMContentLoaded', () => {
+    const storedImageUrl = localStorage.getItem('profileImageUrl');
+    if (storedImageUrl) {
+        const dashboardImg = document.querySelector('.sidebar-user .modify-image img');
+        dashboardImg.src = storedImageUrl;
+    }
+});
+    </script>
 </body>
 </html>

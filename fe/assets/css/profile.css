@@ -49,6 +49,7 @@ a{
 .profile .sidebar .sidebar-user .modify-image img{
     width: 94px;
     height: 86px;
+    border-radius:50%;
 }
 .profile .sidebar .sidebar-user .user-name{
     width: 50%;
@@ -110,6 +111,7 @@ a{
 .profile .main .modify-image img{
     width: 300px;
     height: 288px;
+    border-radius:50%;
 
 }
 .profile .main .modify-image button{
@@ -318,7 +320,7 @@ text-align: center;
 .profile .main-2 .modify-image img{
     width: 300px;
     height: 288px;
-
+    border-radius:50%;
 }
 .profile .main-2 .modify-image button{
     background-color: transparent;

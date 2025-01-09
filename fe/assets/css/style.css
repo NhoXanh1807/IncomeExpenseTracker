@@ -195,6 +195,7 @@ a{
 .main-section .sidebar .sidebar-user .modify-image img{
        width: 94px;
        height: 86px;
+       border-radius:50%;
    }
 .main-section .sidebar .sidebar-user .user-name{
        width: 50%;

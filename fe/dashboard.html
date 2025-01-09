@@ -139,6 +139,18 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lấy URL ảnh từ sessionStorage
+            const storedImageUrl = localStorage.getItem('profileImageUrl');
+            if (storedImageUrl) {
+                // Tìm ảnh trong sidebar và cập nhật thuộc tính src
+                const dashboardImg = document.querySelector('.sidebar-user .modify-image img');
+                dashboardImg.src = storedImageUrl;
+            }
+        });
+    </script>
+    
 </body>
 
 </html>

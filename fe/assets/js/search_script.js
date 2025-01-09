@@ -92,3 +92,11 @@ const descRows = document.querySelectorAll('tr.desc');
 descRows.forEach(descRow => {
   descRow.style.display = 'none';
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const storedImageUrl = localStorage.getItem('profileImageUrl');
+  if (storedImageUrl) {
+      const sidebarImg = document.querySelector('.sidebar-user .modify-image img');
+      sidebarImg.src = storedImageUrl;
+  }
+});
