@@ -74,6 +74,7 @@
     
                 if (response.ok) {
                     const data = await response.json();
+                    window.location.href = '/fe/dashboard.html';
                     
                 } else {
                     // Nếu không thành công, in lỗi chi tiết từ server

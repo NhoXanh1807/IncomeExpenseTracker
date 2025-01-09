@@ -18,12 +18,11 @@
             justify-content: center;
             min-height: 90vh;
         }
-
     </style>
     <div class="container">
         <div class="box form-box">
             <header>Login</header>
-            <form action="" method="post">
+            <form id="loginForm">
                 <div class="field input">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" required>
@@ -35,16 +34,59 @@
                 </div>
 
                 <div class="field input">
-                    
-                    <input type="submit" class="btn" name="submit" value="Login" required>
+                    <input type="submit" class="btn" value="Login">
                 </div>
 
                 <div class="links">
-                    Don't have a account? <a href="register.html">Sign up now</a>
+                    Don't have an account? <a href="register.html">Sign up now</a>
                 </div>
             </form>
         </div>
-        
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent page reload
+
+            // Get form data
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Create request body
+            const loginRequest = {
+                username: username,
+                password: password
+            };
+
+            try {
+                // Send request to API
+                const response = await fetch('http://localhost:8080/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginRequest)
+                });
+
+                if (response.ok) {
+                    const token = await response.text();
+                    console.log('Login successful:', token);
+
+                    // Redirect to dashboard.html
+                    alert('Login successful. Redirecting to dashboard...');
+                    window.location.href = '/fe/dashboard.html';
+                } else {
+                    // Handle server-side errors
+                    const errorText = await response.text();
+                    console.error('Server Error:', errorText);
+                    alert('Login failed: ' + errorText);
+                }
+            } catch (error) {
+                // Handle fetch errors
+                console.error('Fetch Error:', error);
+                alert('An unexpected error occurred. See console for details.');
+            }
+        });
+    </script>
 </body>
 </html>
