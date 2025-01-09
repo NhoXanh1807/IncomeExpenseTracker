@@ -208,11 +208,35 @@
     const userImgMain = document.querySelector('.profile .main .modify-image img'); // Ảnh trong .modify-image
     const userImgProfile = document.querySelector('#input-profile .modify-image img'); // Ảnh trong #input-profile
     const dashimg = document.querySelector('.profile .sidebar .sidebar-user .modify-image img')
-  
-// Xóa URL khi tắt trình duyệt
-window.addEventListener('beforeunload', () => {
- localStorage.removeItem('profileImageUrl');
+    changeImgBtn.addEventListener('click', () => {
+    const imageUrl = prompt("Enter the URL of the new image:");
+    if (imageUrl && imageUrl.trim() !== "") {
+        const trimmedUrl = imageUrl.trim();
+        userImgMain.src = trimmedUrl;
+        userImgProfile.src = trimmedUrl;
+        dashimg.src = trimmedUrl;
+
+        // Lưu URL vào localStorage
+        localStorage.setItem('profileImageUrl', trimmedUrl);
+    } else {
+        alert("No URL entered or invalid URL!");
+    }
 });
+
+// Khi tải lại trang, kiểm tra và cập nhật ảnh
+document.addEventListener('DOMContentLoaded', () => {
+    const storedImageUrl = localStorage.getItem('profileImageUrl');
+    if (storedImageUrl) {
+        userImgMain.src = storedImageUrl;
+        userImgProfile.src = storedImageUrl;
+        dashimg.src = storedImageUrl;
+    }
+});
+
+// Xóa URL khi tắt trình duyệt
+// window.addEventListener('beforeunload', () => {
+//     localStorage.removeItem('profileImageUrl');
+// });
     document.querySelectorAll('.fa-eye-slash').forEach(icon => {
         icon.addEventListener('click', () => {
             // Find the closest input field to this icon
