@@ -36,11 +36,25 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserLoginDTO loginRequest) {
-        String username = loginRequest.getUsername();
-        String password = loginRequest.getPassword();
+    public ResponseEntity<?> login(@RequestBody UserLoginDTO loginRequest) {
+        try {
+            String username = loginRequest.getUsername();
+            String password = loginRequest.getPassword();
 
-        String response = authenticationService.login(username, password);
-        return ResponseEntity.ok(response);
+            // Gọi service để thực hiện đăng nhập và nhận JWT token
+            String token = authenticationService.login(username, password);
+
+            // Trả về JWT token nếu đăng nhập thành công
+            return ResponseEntity.ok(token);
+
+        } catch (IllegalArgumentException ex) {
+            // Trường hợp username/password không hợp lệ
+            return ResponseEntity.badRequest().body("Error: " + ex.getMessage());
+        } catch (Exception ex) {
+            // Bắt tất cả các lỗi không mong muốn khác
+            ex.printStackTrace(); // Log lỗi để dễ debug
+            return ResponseEntity.status(500).body("Internal Server Error: " + ex.getMessage());
+        }
     }
+
 }

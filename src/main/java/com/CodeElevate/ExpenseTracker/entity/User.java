@@ -4,7 +4,6 @@ import com.CodeElevate.ExpenseTracker.dto.UserDTO;
 import com.CodeElevate.ExpenseTracker.dto.UserRegisterDTO;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDate;
 
 @Entity

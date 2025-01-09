@@ -3,21 +3,22 @@ package com.CodeElevate.ExpenseTracker.services.authentication;
 import com.CodeElevate.ExpenseTracker.dto.UserRegisterDTO;
 import com.CodeElevate.ExpenseTracker.entity.User;
 import com.CodeElevate.ExpenseTracker.repository.UserRepository;
-
+import com.CodeElevate.ExpenseTracker.utils.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil; // Inject JwtUtil
 
-    public AuthenticationServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthenticationServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -47,6 +48,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 !passwordEncoder.matches(password, userOptional.get().getPassword())) {
             throw new IllegalArgumentException("Invalid username or password!");
         }
-        return "Login successful!";
+
+        // Trả về thông báo đăng nhập thành công hoặc thông tin người dùng
+        return "Login successful!"; // Hoặc bạn có thể trả về đối tượng người dùng
     }
+
 }

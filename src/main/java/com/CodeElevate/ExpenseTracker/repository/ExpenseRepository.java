@@ -29,4 +29,5 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
                         @Param("category") String category,
                         @Param("startDate") LocalDate startDate,
                         @Param("endDate") LocalDate endDate);
+
 }
