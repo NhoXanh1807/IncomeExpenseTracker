@@ -97,126 +97,145 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-const storedImageUrl = localStorage.getItem('profileImageUrl');
-if (storedImageUrl) {
- const dashboardImg = document.querySelector('.sidebar-user .modify-image img');
- dashboardImg.src = storedImageUrl;
-}
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const fetchIncomes = async () => {
-        try {
-            // Fetch all incomes
-            const response = await fetch('http://localhost:8080/api/income/all');
-            const incomes = await response.json();
-
-            // Update "Past incomes"
-            const pastIncomeContainer = document.querySelector('.past-income-detail');
-            pastIncomeContainer.innerHTML = ''; // Clear old data
-            incomes.forEach(income => {
-                pastIncomeContainer.innerHTML += `
-                    <div class="report">
-                        <div class="content">
-                            <div class="content-title">
-                                <i class="fa-regular fa-comment-dots"></i>
-                                <div class="content-title-main">${income.title}</div>
-                            </div>
-                            <div class="content-amount">
-                                <i class="fa-solid fa-coins"></i>
-                                <div class="content-amount-main">${income.amount} VND</div>
-                            </div>
-                            <div class="content-date">
-                                <i class="fa-regular fa-calendar-days"></i>
-                                <div class="content-date-main">${income.date}</div>
-                            </div>
-                            <div class="content-catagories">
-                                <i class="fa-regular fa-font-awesome"></i>
-                                <div class="content-catagories-main">${income.category}</div>
-                            </div>
-                        </div>
-                        <div class="report-btn">
-                            <button class="modify" data-id="${income.id}"><i class="fa-solid fa-pen"></i></button>
-                            <button class="delete" data-id="${income.id}"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-        } catch (error) {
-            console.error('Error fetching incomes:', error);
-        }
-    };
-
-    const postIncome = async (income) => {
-        try {
-            const response = await fetch('http://localhost:8080/api/income', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(income),
-            });
-
-            if (response.ok) {
-                console.log('Income posted successfully');
-                fetchIncomes(); // Refresh list
-            } else {
-                console.error('Error posting income');
+            const fetchIncomes = async () => {
+                try {
+                    // Fetch all incomes
+                    const response = await fetch('http://localhost:8080/api/income/all');
+                    console.log('Response status:', response.status); // Log status code
+        
+                    if (!response.ok) {
+                        console.error('Failed to fetch incomes, status:', response.status);
+                        return;
+                    }
+        
+                    const data = await response.json();
+                    console.log('Fetched incomes data:', data); // Log the entire response
+        
+                    // Ensure data.content is an array and has items
+                    const incomes = data.content; // Extracting the "content" array
+        
+                    if (Array.isArray(incomes) && incomes.length > 0) {
+                        // Update "Past incomes"
+                        const pastIncomeContainer = document.querySelector('.past-income-detail');
+                        if (!pastIncomeContainer) {
+                            console.error('pastIncomeContainer not found!');
+                            return;
+                        }
+        
+                        pastIncomeContainer.innerHTML = ''; // Clear old data
+                        incomes.forEach(income => {
+                            pastIncomeContainer.innerHTML += `
+                                <div class="report">
+                                    <div class="content">
+                                        <div class="content-title">
+                                            <i class="fa-regular fa-comment-dots"></i>
+                                            <div class="content-title-main">${income.title}</div>
+                                        </div>
+                                        <div class="content-amount">
+                                            <i class="fa-solid fa-coins"></i>
+                                            <div class="content-amount-main">${income.amount} VND</div>
+                                        </div>
+                                        <div class="content-date">
+                                            <i class="fa-regular fa-calendar-days"></i>
+                                            <div class="content-date-main">${income.date}</div>
+                                        </div>
+                                        <div class="content-catagories">
+                                            <i class="fa-regular fa-font-awesome"></i>
+                                            <div class="content-catagories-main">${income.category}</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-btn">
+                                        <button class="modify" data-id="${income.id}"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="delete" data-id="${income.id}"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        console.error('No incomes found or data is not in the expected format');
+                    }
+                } catch (error) {
+                    console.error('Error fetching incomes:', error);
+                }
+            };
+        
+            const postIncome = async (income) => {
+                try {
+                    const response = await fetch('http://localhost:8080/api/income', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(income),
+                    });
+                    console.log('Post income response status:', response.status); // Log the status
+        
+                    if (response.ok) {
+                        console.log('Income posted successfully');
+                        fetchIncomes(); // Refresh list
+                    } else {
+                        console.error('Error posting income, status:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error posting income:', error);
+                }
+            };
+        
+            const handleFormSubmit = (event) => {
+                event.preventDefault();
+        
+                const income = {
+                    title: document.getElementById('title').value,
+                    amount: parseFloat(document.getElementById('amount').value),
+                    date: document.getElementById('date').value,
+                    description: document.getElementById('description').value,
+                    category: document.getElementById('category').value,
+                };
+        
+                postIncome(income);
+            };
+        
+            // Fetch data when page loads
+            fetchIncomes();
+        
+            // Add event listener for form submission
+            document.querySelector('.post-form').addEventListener('submit', handleFormSubmit);
+        });
+        
+        document.querySelector('.past-income-detail').addEventListener('click', async (event) => {
+            const button = event.target.closest('button');
+            if (!button) return;
+        
+            const id = button.dataset.id;
+        
+            if (button.classList.contains('delete')) {
+                // Handle delete
+                try {
+                    const response = await fetch(`http://localhost:8080/api/income/${id}`, {
+                        method: 'DELETE',
+                    });
+                    console.log('Delete response status:', response.status); // Log delete status
+        
+                    if (response.ok) {
+                        console.log('Income deleted successfully');
+                        // Reload the page after successful deletion
+                        window.location.reload(); // Tải lại trang
+                    } else {
+                        console.error('Error deleting income, status:', response.status);
+                        const errorText = await response.text(); // Log error details if any
+                        console.error('Error details:', errorText);
+                    }
+                } catch (error) {
+                    console.error('Error deleting income:', error);
+                }
             }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-
-        const income = {
-            title: document.getElementById('title').value,
-            amount: parseFloat(document.getElementById('amount').value),
-            date: document.getElementById('date').value,
-            description: document.getElementById('description').value,
-            category: document.getElementById('category').value,
-        };
-
-        postIncome(income);
-    };
-
-    // Fetch data when page loads
-    fetchIncomes();
-
-    // Add event listener for form submission
-    document.querySelector('.post-form').addEventListener('submit', handleFormSubmit);
-});
-document.querySelector('.past-income-detail').addEventListener('click', async (event) => {
-    const button = event.target.closest('button');
-    if (!button) return;
-
-    const id = button.dataset.id;
-
-    if (button.classList.contains('delete')) {
-        // Handle delete
-        try {
-            const response = await fetch(`http://localhost:8080/api/income/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                console.log('Income deleted successfully');
-                fetchIncomes(); // Refresh list
-            } else {
-                console.error('Error deleting income');
+        
+            if (button.classList.contains('modify')) {
+                // Handle modify (open a modal or pre-fill the form for editing)
+                alert(`Modify functionality for ID: ${id} to be implemented`);
             }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
-    if (button.classList.contains('modify')) {
-        // Handle modify (open a modal or pre-fill the form for editing)
-        alert(`Modify functionality for ID: ${id} to be implemented`);
-    }
-});
-
+        });
+        
 </script>
 </body>
 </html>

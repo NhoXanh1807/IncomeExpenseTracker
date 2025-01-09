@@ -255,11 +255,10 @@ input[type=number]::-webkit-inner-spin-button {
 
 .main-section .main-right .inner-income-detail .past-income .past-income-detail {
     display:flex;
-    
+    flex-direction: column;
     width: 100%;
     height: auto;
     display: flex;
-
     border: 1px solid #1387B2;
     border-radius: 0 0 20px 20px;
     color: white;
@@ -279,6 +278,7 @@ input[type=number]::-webkit-inner-spin-button {
     gap: 5px;
     padding: 10px 0;
     position: relative;
+    border-bottom: 1px solid #ffffff;
     
 }
 .main-section .main-right .inner-income-detail .past-income .past-income-detail .report .content {
