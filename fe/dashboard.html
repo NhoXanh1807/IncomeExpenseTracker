@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <div class="main-section">
         <div class="sidebar">
             <a href="/fe/profile.html">
@@ -36,121 +35,118 @@
                 <nav class="inner-right-top">
                     <ul>
                         <li>
-                            <div>
-                                Balance:
-                            </div>
-                            <div class="value">
-                                0 đ
-                            </div>
+                            <div>Balance:</div>
+                            <div class="value">0 đ</div>
                         </li>
                         <li>
-                            <div>
-                                Total income:
-                            </div>
-                            <div class="value">
-                                0 đ
-                            </div>
-
+                            <div>Total income:</div>
+                            <div class="value">0 đ</div>
                         </li>
                         <li>
-                            <div>
-                                Total expense:
-                            </div>
-                            <div class="value">
-                                0 đ
-                            </div>
-
+                            <div>Total expense:</div>
+                            <div class="value">0 đ</div>
                         </li>
                     </ul>
                 </nav>
                 <div class="inner-right-bottom">
                     <div class="inner-income-chart">
                         <div class="inner-history">
-                            <div class="inner-history-title">
-                                Recent history
-                            </div>
+                            <div class="inner-history-title">Recent history</div>
                             <div class="inner-history-detail">
-                                <div class="income">
-                                    <div class="amount">- 200.000VND</div>
-                                    <div class="content">Dining out</div>
-                                </div>
-                                <div class="expense">
-                                    <div class="amount">+ 400.000VND</div>
-                                    <div class="content">Bonus</div>
-                                </div>
+                                <!-- Nội dung lịch sử sẽ được cập nhật từ JS -->
                             </div>
                         </div>
                     </div>
                     <div class="inner-statistic">
-
                         <div class="inner-income">
-                            <div class="inner-income-title">
-                                Income:
-                            </div>
+                            <div class="inner-income-title">Income:</div>
                             <div class="inner-income-detail">
-                                <div class="minimum">
-                                    <div class="title">Minimum:</div>
-                                    <div class="amount">200.000VND</div>
-                                </div>
-                                <div class="maximum">
-                                    <div class="title">Maximum:</div>
-                                    <div class="amount">400.000VND</div>
-                                </div>
+                                <!-- Thống kê thu nhập sẽ được cập nhật từ JS -->
                             </div>
                         </div>
                         <div class="inner-expense">
-                            <div class="inner-expense-title">
-                                Expense:
-                            </div>
+                            <div class="inner-expense-title">Expense:</div>
                             <div class="inner-expense-detail">
-                                <div class="minimum">
-                                    <div class="title">Minimum:</div>
-                                    <div class="amount">200.000VND</div>
-                                </div>
-                                <div class="maximum">
-                                    <div class="title">Maximum:</div>
-                                    <div class="amount">400.000VND</div>
-                                </div>
+                                <!-- Thống kê chi tiêu sẽ được cập nhật từ JS -->
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="inner-right-end">
                     <div class="inner-expense-chart">
-                        <div class="inner-expense-title">
-                            Income chart
-                        </div>
-                        <div class="inner-chart">
-                            Image
-                        </div>
+                        <div class="inner-expense-title">Income chart</div>
+                        <div class="inner-chart">Image</div>
                     </div>
                 </div>
                 <div class="inner-right-end">
                     <div class="inner-expense-chart">
-                        <div class="inner-expense-title">
-                            Expense chart
-                        </div>
-                        <div class="inner-chart">
-                            Image
-                        </div>
+                        <div class="inner-expense-title">Expense chart</div>
+                        <div class="inner-chart">Image</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lấy URL ảnh từ sessionStorage
-            const storedImageUrl = localStorage.getItem('profileImageUrl');
-            if (storedImageUrl) {
-                // Tìm ảnh trong sidebar và cập nhật thuộc tính src
-                const dashboardImg = document.querySelector('.sidebar-user .modify-image img');
-                dashboardImg.src = storedImageUrl;
+        document.addEventListener('DOMContentLoaded', async () => {
+            const apiUrl = 'http://localhost:8080/api/stats/all';
+
+            try {
+                const response = await fetch(apiUrl, { method: 'GET' });
+                if (!response.ok) throw new Error('Failed to fetch data');
+
+                const data = await response.json();
+
+                // Cập nhật thông tin balance, income, expense
+                const values = document.querySelectorAll('.inner-right-top .value');
+                values[0].textContent = `${data.balance} đ`;
+                values[1].textContent = `${data.income} đ`;
+                values[2].textContent = `${data.expense} đ`;
+
+                // Cập nhật lịch sử gần đây
+                const historyContainer = document.querySelector('.inner-history-detail');
+                historyContainer.innerHTML = `
+                    <div class="income">
+                        <div class="amount">+ ${data.latestIncome.amount} VND</div>
+                        <div class="content">${data.latestIncome.title}</div>
+                    </div>
+                    <div class="expense">
+                        <div class="amount">- ${data.latestExpense.amount} VND</div>
+                        <div class="content">${data.latestExpense.title}</div>
+                    </div>
+                `;
+
+                // Cập nhật thống kê thu nhập
+                const incomeStats = document.querySelector('.inner-income-detail');
+                incomeStats.innerHTML = `
+                    <div class="minimum">
+                        <div class="title">Minimum:</div>
+                        <div class="amount">${data.minIncome} VND</div>
+                    </div>
+                    <div class="maximum">
+                        <div class="title">Maximum:</div>
+                        <div class="amount">${data.maxIncome} VND</div>
+                    </div>
+                `;
+
+                // Cập nhật thống kê chi tiêu
+                const expenseStats = document.querySelector('.inner-expense-detail');
+                expenseStats.innerHTML = `
+                    <div class="minimum">
+                        <div class="title">Minimum:</div>
+                        <div class="amount">${data.minExpense} VND</div>
+                    </div>
+                    <div class="maximum">
+                        <div class="title">Maximum:</div>
+                        <div class="amount">${data.maxExpense} VND</div>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error fetching or processing data:', error);
             }
         });
     </script>
-    
 </body>
 
 </html>
