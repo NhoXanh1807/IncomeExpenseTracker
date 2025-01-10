@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,128 +95,174 @@
             </div> 
         </div>
     </div>
+    
     <script>
-               document.addEventListener('DOMContentLoaded', () => {
-    const storedImageUrl = localStorage.getItem('profileImageUrl');
-    if (storedImageUrl) {
-        const dashboardImg = document.querySelector('.sidebar-user .modify-image img');
-        dashboardImg.src = storedImageUrl;
-    }
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const fetchExpenses = async () => {
-        try {
-            // Fetch all expenses
-            const response = await fetch('http://localhost:8080/api/expense/all');
-            const expenses = await response.json();
+        document.addEventListener('DOMContentLoaded', () => {
+            const fetchExpenses = async () => {
+                try {
+                    const response = await fetch('http://localhost:8080/api/expense/all');
+                    if (!response.ok) {
+                        console.error('Failed to fetch expenses, status:', response.status);
+                        return;
+                    }
+                    const data = await response.json();
+                    const expenses = data; // Directly use data as an array
+        
+                    const pastExpenseContainer = document.querySelector('.past-expense-detail');
+                    if (Array.isArray(expenses) && expenses.length > 0) {
+                        pastExpenseContainer.innerHTML = ''; // Clear previous content
+                        expenses.forEach(expense => {
+                            pastExpenseContainer.innerHTML += `
+                                <div class="report">
+                                    <div class="content">
+                                        <div class="content-title">
+                                            <i class="fa-regular fa-comment-dots"></i>
+                                            <div class="content-title-main">${expense.title}</div>
+                                        </div>
+                                        <div class="content-amount">
+                                            <i class="fa-solid fa-coins"></i>
+                                            <div class="content-amount-main">${expense.amount} VND</div>
+                                        </div>
+                                        <div class="content-date">
+                                            <i class="fa-regular fa-calendar-days"></i>
+                                            <div class="content-date-main">${expense.date}</div>
+                                        </div>
+                                        <div class="content-catagories">
+                                            <i class="fa-regular fa-font-awesome"></i>
+                                            <div class="content-catagories-main">${expense.category}</div>
+                                        </div>
+                                    </div>
+                                    <div class="report-btn">
+                                        <button class="modify" data-id="${expense.id}"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="delete" data-id="${expense.id}"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        pastExpenseContainer.innerHTML = '<p>No past expenses found.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error fetching expenses:', error);
+                }
+            };
 
-            // Update "Past expenses"
-            const pastExpenseContainer = document.querySelector('.past-expense-detail');
-            pastExpenseContainer.innerHTML = ''; // Clear old data
-            expenses.forEach(expense => {
-                pastExpenseContainer.innerHTML += `
-                    <div class="report">
-                        <div class="content">
-                            <div class="content-title">
-                                <i class="fa-regular fa-comment-dots"></i>
-                                <div class="content-title-main">${expense.title}</div>
-                            </div>
-                            <div class="content-amount">
-                                <i class="fa-solid fa-coins"></i>
-                                <div class="content-amount-main">${expense.amount} VND</div>
-                            </div>
-                            <div class="content-date">
-                                <i class="fa-regular fa-calendar-days"></i>
-                                <div class="content-date-main">${expense.date}</div>
-                            </div>
-                            <div class="content-catagories">
-                                <i class="fa-regular fa-font-awesome"></i>
-                                <div class="content-catagories-main">${expense.category}</div>
-                            </div>
-                        </div>
-                        <div class="report-btn">
-                            <button class="modify" data-id="${expense.id}"><i class="fa-solid fa-pen"></i></button>
-                            <button class="delete" data-id="${expense.id}"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
+            const postExpense = async (expense) => {
+                try {
+                    const response = await fetch('http://localhost:8080/api/expense', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(expense),
+                    });
+                    if (response.ok) {
+                        console.log('Expense posted successfully');
+                        fetchExpenses(); // Refresh list
+                    } else {
+                        console.error('Error posting expense, status:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error posting expense:', error);
+                }
+            };
+
+            const updateExpense = async (id, expense) => {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/expense/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(expense),
+                    });
+                    if (response.ok) {
+                        console.log('Expense updated successfully');
+                        fetchExpenses(); // Refresh list
+                    } else {
+                        console.error('Error updating expense, status:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error updating expense:', error);
+                }
+            };
+
+            const handleFormSubmit = (event) => {
+                event.preventDefault();
+
+                const form = document.querySelector('.post-form');
+                const editingId = form.dataset.editingId;
+
+                const expense = {
+                    title: document.getElementById('title').value,
+                    amount: parseFloat(document.getElementById('amount').value),
+                    date: document.getElementById('date').value,
+                    description: document.getElementById('description').value,
+                    category: document.getElementById('category').value,
+                };
+
+                if (editingId) {
+                    updateExpense(editingId, expense);
+                    delete form.dataset.editingId; // Clear edit mode
+                } else {
+                    postExpense(expense);
+                }
+            };
+
+            document.querySelector('.post-form').addEventListener('submit', handleFormSubmit);
+
+            document.querySelector('.past-expense-detail').addEventListener('click', async (event) => {
+                const button = event.target.closest('button');
+                if (!button) return;
+
+                const id = button.dataset.id;
+
+                if (button.classList.contains('delete')) {
+                    try {
+                        const response = await fetch(`http://localhost:8080/api/expense/${id}`, {
+                            method: 'DELETE',
+                        });
+                        if (response.ok) {
+                            console.log('Expense deleted successfully');
+                            fetchExpenses(); // Refresh list after delete
+                        } else {
+                            console.error('Error deleting expense');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting expense:', error);
+                    }
+                }
+
+                if (button.classList.contains('modify')) {
+                    const expense = await fetchExpenseById(id);
+                    if (expense) {
+                        document.getElementById('title').value = expense.title;
+                        document.getElementById('amount').value = expense.amount;
+                        document.getElementById('date').value = expense.date;
+                        document.getElementById('description').value = expense.description;
+                        document.getElementById('category').value = expense.category;
+
+                        document.querySelector('.post-form').dataset.editingId = id;
+                    }
+                }
             });
-        } catch (error) {
-            console.error('Error fetching expenses:', error);
-        }
-    };
 
-    const postExpense = async (expense) => {
-        try {
-            const response = await fetch('http://localhost:8080/api/expense', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(expense),
-            });
+            const fetchExpenseById = async (id) => {
+                try {
+                    const response = await fetch(`http://localhost:8080/api/expense/${id}`);
+                    if (response.ok) {
+                        return await response.json();
+                    } else {
+                        console.error('Failed to fetch expense by ID');
+                    }
+                } catch (error) {
+                    console.error('Error fetching expense by ID:', error);
+                }
+                return null;
+            };
 
-            if (response.ok) {
-                console.log('Expense posted successfully');
-                fetchExpenses(); // Refresh list
-            } else {
-                console.error('Error posting expense');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-
-        const expense = {
-            title: document.getElementById('title').value,
-            amount: parseFloat(document.getElementById('amount').value),
-            date: document.getElementById('date').value,
-            description: document.getElementById('description').value,
-            category: document.getElementById('category').value,
-        };
-
-        postExpense(expense);
-    };
-
-    // Fetch data when page loads
-    fetchExpenses();
-
-    // Add event listener for form submission
-    document.querySelector('.post-form').addEventListener('submit', handleFormSubmit);
-});
-document.querySelector('.past-expense-detail').addEventListener('click', async (event) => {
-    const button = event.target.closest('button');
-    if (!button) return;
-
-    const id = button.dataset.id;
-
-    if (button.classList.contains('delete')) {
-        // Handle delete
-        try {
-            const response = await fetch(`http://localhost:8080/api/expense/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                console.log('Expense deleted successfully');
-                fetchExpenses(); // Refresh list
-            } else {
-                console.error('Error deleting expense');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
-    if (button.classList.contains('modify')) {
-        // Handle modify (open a modal or pre-fill the form for editing)
-        alert(`Modify functionality for ID: ${id} to be implemented`);
-    }
-});
-
+            fetchExpenses();
+        });
     </script>
 </body>
 </html>
